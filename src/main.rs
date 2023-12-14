@@ -1,5 +1,7 @@
 use std::error::Error;
 use std::fs;
+use std::io;
+use std::io::Read;
 
 use crate::args::Args;
 use clap::Parser;
@@ -8,7 +10,17 @@ mod args;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let Args { file, start, end } = Args::parse();
-    let contents = fs::read_to_string(file)?;
+    let contents = {
+        match file {
+            Some(path) => fs::read_to_string(path)?,
+            None => {
+                let mut stdin = String::new();
+                io::stdin().read_to_string(&mut stdin)?;
+                stdin
+            }
+        }
+
+    };
     let start = start.unwrap_or_default().max(1) - 1;
     let end = end.unwrap_or(usize::MAX).max(1) - 1;
     let lines: Vec<_> = contents
