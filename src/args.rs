@@ -1,8 +1,8 @@
-use std::path::PathBuf;
 use clap::Parser;
+use std::path::PathBuf;
 
 mod about {
-	pub const ABOUT: &str = "\
+    pub const ABOUT: &str = "\
 Print a range of lines of a file.
 Both --start and --end are inclusive.
 Line numbers are 1 indexed, but 0 also means 1.";

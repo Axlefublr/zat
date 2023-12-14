@@ -1,9 +1,8 @@
+use crate::args::Args;
+use clap::Parser;
 use std::error::Error;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
-
-use crate::args::Args;
-use clap::Parser;
 
 mod args;
 
@@ -20,7 +19,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .lines()
         .enumerate()
         .filter(|&(index, _)| index >= start && index <= end)
-        .map(|(_, line)| line.unwrap_or(String::new()));
+        .map(|(_, line)| line.unwrap()); // invalid utf8 and IO problems shouldn't be silent
 
     for line in lines {
         println!("{line}");
