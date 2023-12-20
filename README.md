@@ -39,10 +39,10 @@ If you want to display a range of lines of stdin, rather than a file, just don't
 git --help | zat -s 12 -e 16
 ```
 
-# Usage
+## Usage
 
 ```
-Print a range of lines of a file.
+Print a range of lines of a file. Both --start and --end are inclusive. Line numbers are 1 indexed, but 0 also means 1.
 
 Usage: zat [FILE] [OPTIONS]
 
@@ -53,7 +53,7 @@ Options:
   -V, --version        Print version
 ```
 
-# Install
+## Install
 
 ```
 cargo install zat
@@ -61,7 +61,7 @@ cargo install zat
 
 `cargo binstall` and `cargo quickinstall` are also supported.
 
-# Uninstall
+## Uninstall
 
 ```
 cargo uninstall zat
